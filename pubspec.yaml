@@ -18,18 +18,19 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   dio: 
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
+  hive: 
+  hive_flutter: 
   path_provider:
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  json_serializable: ^6.5.4
-  build_runner: ^2.3.3
-  hive_generator: ^2.0.0
+  json_serializable: 
+  build_runner: 
+  hive_generator: 
 
 
 

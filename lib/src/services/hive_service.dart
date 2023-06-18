@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter_hivedb_example/src/models/user_info.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,10 +19,16 @@ class HiveService extends GetxService {
     Hive.registerAdapter(UserAdapter(), override: true);
     Hive.registerAdapter(AddressAdapter(), override: true);
     Hive.registerAdapter(GeoAdapter(), override: true);
+    Hive.registerAdapter(UserInfoAdapter(), override: true);
   }
 
   Future<void> openBoxes() async {
-    await Hive.openBox('user');
+    await Hive.openBox(
+      'user',
+    );
+    await Hive.openBox<List<UserInfo>>(
+      'userInfo',
+    );
   }
 
   Future<void> closeHiveBoxes() {

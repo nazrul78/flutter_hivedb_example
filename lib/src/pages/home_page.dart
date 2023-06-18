@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hivedb_example/src/config/base.dart';
+import 'package:flutter_hivedb_example/src/pages/example_of_nested_list.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 
 class HomePage extends StatelessWidget with Base {
@@ -10,47 +12,32 @@ class HomePage extends StatelessWidget with Base {
         appBar: AppBar(
           title: Text('Example of hive DB'),
           centerTitle: true,
-          actions: [
-            TextButton.icon(
-                onPressed: (() {
-                  homeC.getUserDataFromHiveDb();
-                }),
-                icon: Icon(Icons.arrow_circle_down),
-                label: Text('')),
-            TextButton.icon(
-                onPressed: (() {
-                  homeC.clearUsers();
-                }),
-                icon: Icon(Icons.delete),
-                label: Text(''))
-          ],
         ),
-        body: homeC.isLoading.value
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView.builder(
-                itemCount: homeC.userList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final user = homeC.userList[index];
-                  return ListTile(
-                    leading: const Icon(Icons.person),
-                    trailing: Text(
-                      "${user.id}",
-                      style: TextStyle(color: Colors.green, fontSize: 15),
-                    ),
-                    title: Text("${user.name}"),
-                    subtitle: Column(
-                      children: [
-                        Text("${user.address!.city}"),
-                        Text("${user.address!.geo!.lat}"),
-                      ],
-                    ),
-                  );
-                }),
+        body: Center(
+          child: Column(
+            children: [
+              userInfoC.isLoading.value
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 50),
+                      child: CircularProgressIndicator(),
+                    )
+                  : SizedBox(),
+              TextButton(
+                  onPressed: () async {
+                    await userInfoC.dataStoreInHive();
+                  },
+                  child: Text('Start the data puting')),
+              TextButton(
+                  onPressed: () {
+                    userInfoC.getAllDataFromHive();
+                  },
+                  child: Text('Get All data')),
+            ],
+          ),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            homeC.getUsers();
+            Get.to(() => ExampleOfNestedList());
           },
           child: const Icon(Icons.add),
         ),
