@@ -26,7 +26,7 @@ class UserInfoController extends GetxController {
     final userInfoBox = Hive.box<List<UserInfo>>('userInfo');
     log('Started >>>>>>>>>>>>>>>>>>>>>');
     try {
-      for (var i = 0; i < 500; i++) {
+      for (var i = 0; i < 1500; i++) {
         await insartNewRow();
         var users = userInfoBox.get('user_information');
 
@@ -71,11 +71,11 @@ class UserInfoController extends GetxController {
       var users = userInfoBox.get('user_information');
 
       if (users != null && users.length > 0) {
-        log('lllllllllll');
+        log('Second time>>>>>>>>>>');
         userInfoList.addAll(users);
         userInfoList.add(userInfo);
       } else {
-        log('ffffffffff');
+        log('First time>>>>>>>>>>');
 
         userInfoList.add(userInfo);
       }
